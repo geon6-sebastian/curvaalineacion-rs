@@ -2895,6 +2895,7 @@ fn main() {
                 "align" => inv_align_dist_area(&plat, &elli, phi1, l1, phi2, l2, max_step),
                 "normal" => inv_normal_dist_area(&plat, &elli, phi1, l1, phi2, l2, max_step),
                 "geodesic" => inv_geodesic_dist_area(&plat, &elli, phi1, l1, phi2, l2, max_step),
+                "loxo" => inv_loxo_dist_area(&plat, &elli, phi1, l1, phi2, l2, max_step),
                 _ => inv_central_dist_area(&plat, &elli, phi1, l1, phi2, l2, max_step),
             };
 
