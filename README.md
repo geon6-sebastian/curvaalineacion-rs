@@ -1,6 +1,6 @@
 # Curva de Alineación
 
-La curva de alineación representa, en forma ideal, la trayectoria del eje de colimación de un teodolito. A diferencia de las secciones normales y centrales, la curva de alineación no es plana sino que tiene torsión, lo que impide soluciones analíticas directas para los problemas geodésicos directo e inverso. En "curvas.py" se implementan las fórmulas de la curva a partir de su función implícita y sus derivadas, formulando sistemas de ecuaciones diferenciales ordinarias para el cálculo de acimut, longitud y área. Las fórmulas están descritas en el documento ["La curva de alineación"](https://doi.org/10.13140/RG.2.2.20608.39684).
+La curva de alineación representa, en forma ideal, la trayectoria del eje de colimación de un teodolito. A diferencia de las secciones normales y centrales, la curva de alineación no es plana sino que tiene torsión, lo que impide soluciones analíticas directas para los problemas geodésicos directo e inverso. Este programa es una traducción en Rust de "curvas.py" donde se implementan las fórmulas de la curva a partir de su función implícita y sus derivadas, formulando sistemas de ecuaciones diferenciales ordinarias para el cálculo de acimut, longitud y área. Las fórmulas están descritas en el documento ["La curva de alineación"](https://doi.org/10.13140/RG.2.2.20608.39684).
 El problema inverso se resuelve eficientemente mediante integración numérica con el método de Dormand-Prince. El problema directo requiere un esquema iterativo de Newton-Raphson bivariado con derivadas numéricas, resultando computacionalmente costoso; además no es una implementación robusta y debe ser siempre comprobado con el problema inverso.
 Esta forma de resolver la curva de alineación se extiende a los casos de la sección normal primera y la sección central. Estas curvas suelen ser similares entre sí, excepto cuando los puntos terminales están cerca de ser antipodales. En este ejemplo se representan las curvas de alineación (verde), sección normal (magenta) y sección central (negro) con puntos terminales (latitud, longitud): (-30, 0) y (30, 179).
 
@@ -17,37 +17,20 @@ Esta forma de resolver la curva de alineación se extiende a los casos de la sec
 
 ## Requisitos
 
-- **Python 3.x**
+- **rust+cargo**
 
 ```bash
-pip install numba
-pip install pandas
-pip install geopandas pyshp simplekml shapely
+rustup default nightly
 ```
-
-En Linux se debe instalar python-venv. Por ejemplo, en Ubuntu y derivados:
-
-```bash
-sudo apt install python3-pip
-sudo apt install python3.12-venv
-```
-
-donde "3.12" se debe modificar de acuerdo a la versión disponible en su distribución. Luego se debe crear y activar un entorno virtual:
-
-```bash
-python3 -m venv miscurvas
-source ./miscurvas/bin/activate
-```
-
-Una vez activado, se pueden instalar los requisitos con "pip install".
-
 ## Instalación
 
 **Clonar el repositorio:**
 
 ```bash
-git clone https://github.com/geon6-sebastian/curvaalineacion.git
-cd curvaalineacion
+git https://github.com/geon6-sebastian/curvaalineacion-rs.git
+cd curvaalineacion-rs
+cargo build --release
+cd target/release
 ```
 
 ---
@@ -57,7 +40,12 @@ cd curvaalineacion
 Para ejecutar el script, utiliza el siguiente comando en la terminal:
 
 ```bash
-python curvas.py [argumentos]
+curvas [argumentos]
+```
+
+En Linux:
+```bash
+./curvas [argumentos]
 ```
 
 ### Argumentos
@@ -83,7 +71,7 @@ python curvas.py [argumentos]
 **Ejemplo con puntos cercanos a ser antipodales (Problema inverso, paso 0.1 grados):**
 
 ```bash
-python curvas.py -i -P1 -30 0 -P2 30 179 -t align -o curva_align
+curvas -i -P1 -30 0 -P2 30 179 -t align -o curva_align
 ```
 
 Salida:
@@ -105,18 +93,18 @@ Archivos generados
 Estos comandos generan las curvas de la figura más arriba.
 
 ```bash
-python curvas.py -i -P1 -30 0 -P2 30 179 -t normal -o curva_normal
+curvas -i -P1 -30 0 -P2 30 179 -t normal -o curva_normal
 ```
 
 ```bash
-python curvas.py -i -P1 -30 0 -P2 30 179 -t central -o curva_central
+curvas -i -P1 -30 0 -P2 30 179 -t central -o curva_central
 ```
 
 
 **Ejemplo básico de problema directo, paso 0.01 grados:**
 
 ```bash
-python curvas.py -d -P1 -30 -60 -a 30 -s 5000000 -t align -o align_0.01 -mstep 0.01
+curvas -d -P1 -30 -60 -a 30 -s 5000000 -t align -o align_0.01 -mstep 0.01
 ```
 
 Para distancias muy largas, el algoritmo es altamente inestable cuando el paso máximo es menor a 0.01.
@@ -124,7 +112,7 @@ Para distancias muy largas, el algoritmo es altamente inestable cuando el paso m
 **Cálculo de la superficie de un polígono uniendo vértices con la curva de alineación:**
 
 ```bash
-python curvas.py -poly poligono.csv -t align -o poligo
+curvas -poly poligono.csv -t align -o poligo
 ```
 
 Donde el contenido de "poligono.csv" es:
@@ -172,7 +160,7 @@ Archivos generados
 En Meyer, T. H. (2024, p. 140) [Vector-algebra algorithms... ](https://www.mdpi.com/2673-7418/4/2/8) se proporciona el ejemplo
 P1 (-40, 165) P2 (45, 0) reportando una distancia de 18671843.56 m. Pero, en nuestro caso al ejecutar
 ```bash
-python curvas.py -i -P1 -40 165 -P2 45 0 -t align
+curvas -i -P1 -40 165 -P2 45 0 -t align
 ```
 se tiene una inconsistencia de unos 3 m:
 ```bash
