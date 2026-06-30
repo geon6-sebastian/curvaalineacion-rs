@@ -55,7 +55,7 @@ En Linux:
 | -i, --inverso                             | Ejecutar problema inverso                                                                                            | No               | -                          |
 | -d, --directo                             | Ejecutar problema directo                                                                                            | No               | -                          |
 | -poly, --poly-sup ('coords.csv')          | Calcula la superficie dentro de un polígono dado en un archivo CSV/TXT                                               | No               | -                          |
-| -t, --tipo ['align', 'normal', 'central'] |                                                                                                                      | No               | 'central'                  |
+| -t, --tipo ['align', 'normal', 'central', 'loxo', 'geodesic'] |                                                                                                                      | No               | 'central'                  |
 | -P1 (latitud longitud)                    | Punto 1: latitud longitud (en grados decimales). Requerido para -i y -d                                              | Si, para -i y -d | -                          |
 | -P2 (latitud longitud)                    | Punto 1: latitud longitud (en grados decimales). Requerido para -i                                                   | Si, para -i      | -                          |
 | -e (a, inv_f)                             | Elipsoide: semieje_mayor inversa_aplastamiento (por defecto: GRS80)                                                  |                  | GRS80_a, 298.2572221008827 |
@@ -101,8 +101,13 @@ curvas -i -P1 -30 0 -P2 30 179 -t normal -o curva_normal
 ```bash
 curvas -i -P1 -30 0 -P2 30 179 -t central -o curva_central
 ```
-
-
+Se agregan las curvas loxodrómica y geodésica:
+```bash
+curvas -i -P1 -30 0 -P2 30 179 -t loxo -o curva_loxo
+```
+```bash
+curvas -i -P1 -30 0 -P2 30 179 -t geodesic -o curva_geodesic
+```
 **Ejemplo básico de problema directo, paso 0.01 grados:**
 
 ```bash
