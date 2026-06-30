@@ -27,7 +27,7 @@ rustup default nightly
 **Clonar el repositorio:**
 
 ```bash
-git https://github.com/geon6-sebastian/curvaalineacion-rs.git
+git clone https://github.com/geon6-sebastian/curvaalineacion-rs.git
 cd curvaalineacion-rs
 cargo build --release
 cd target/release
