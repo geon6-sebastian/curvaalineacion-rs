@@ -80,10 +80,12 @@ Salida:
 ========================================
 Acimut (deg): 110.7675169475
 Distancia (m): 21656598.9243
-Area (m2): 2
+Area (m2): 1
 Latitud Vértice phi0 (deg): 38.5170077016
 Longitud Vértice L0 (deg): 135.6005780565
 ========================================
+
+Archivos guardados con base: curva_align
 
 Generando archivos: curva_align.* ...
 Shapefile guardado como 'curva_align_puntos.shp' con 2389 puntos y 5 columnas de datos.
@@ -132,27 +134,22 @@ Donde el contenido de "poligono.csv" es:
 
 La salida del comando es:
 ```bash
-==================================================
+========================================
 Calculando polígono con 9 vértices...
---------------------------------------------------
-Arista     Distancia (m)   Acimut (deg)
---------------------------------------------------
-1 - 2     2527150.9066    99.31718166
-2 - 3     1962417.5168    7.61017844
-3 - 4     2013087.0434    -18.51916513
-4 - 5     2085855.2856    -6.21369770
-5 - 6     1998041.0725    -21.20642523
-6 - 7     1472208.4403    -37.67719168
-7 - 8     2438801.7893    -129.40724881
-8 - 9     1550287.6557    -128.03738171
-9 - 1     7473628.1239    -175.69485245
---------------------------------------------------
-Superficie del polígono (m2): 34975442749769.69
-==================================================
+Arista 1 -> 2: Distancia = 2527150.9066 m, Acimut = 99.31718166 deg, Área = -41312008676305.24 m²
+Arista 2 -> 3: Distancia = 1962417.5168 m, Acimut = 7.61017844 deg, Área = -1985599917508.05 m²
+Arista 3 -> 4: Distancia = 2013087.0434 m, Acimut = -18.51916513 deg, Área = 2873389143572.14 m²
+Arista 4 -> 5: Distancia = 2085855.2856 m, Acimut = -6.21369770 deg, Área = 498719358475.52 m²
+Arista 5 -> 6: Distancia = 1998041.0725 m, Acimut = -21.20642523 deg, Área = 184464428610.65 m²
+Arista 6 -> 7: Distancia = 1472208.4403 m, Acimut = -37.67719168 deg, Área = -1171528707698.50 m²
+Arista 7 -> 8: Distancia = 2438801.7893 m, Acimut = -129.40724881 deg, Área = -1943518269245.79 m²
+Arista 8 -> 9: Distancia = 1550287.6557 m, Acimut = -128.03738171 deg, Área = 306439414761.83 m²
+Arista 9 -> 1: Distancia = 7473628.1239 m, Acimut = -175.69485245 deg, Área = 7574200475568.19 m²
+----------------------------------------
+Superficie del polígono (m2): 34975442749769.24
+========================================
 
-Generando archivos: poligo.* ...
-Shapefile guardado como 'poligo_puntos.shp' con 2313 puntos y 5 columnas de datos.
-Archivos generados
+Archivos guardados con base: poligo
 ```
 
 !["Polígono poligo.kmz"](./figpoligo.png)
@@ -167,7 +164,7 @@ se tiene una inconsistencia de unos 3 m:
 ========================================
 Acimut (deg): -62.3889781191
 Distancia (m): 18671840.3838
-Area (m2): -34934108256379
+Area (m2): -34934108256376
 Latitud Vértice phi0 (deg): 48.6480754482
 Longitud Vértice L0 (deg): 28.2981412449
 ========================================
